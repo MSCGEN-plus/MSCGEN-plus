@@ -1,0 +1,47 @@
+#CodeInput{
+    left: 5%;
+    color: transparent;
+    background: transparent;
+    caret-color: white;
+    resize: none;
+    outline: none;
+}
+
+#CodeDisplay{
+
+}
+
+#NumberDisplay, #ErrorNumberDisplay{
+    text-align: end;
+    width: 5% !important;
+}
+
+#ErrorDisplay{
+    display: none;
+    height: fit-content;
+    border: 1px solid #F2DEDE;
+}
+
+.ErrorLine{
+    color: red;
+    width: 100% !important;
+    height: fit-content !important;
+    display: inline-block;
+}
+.ErrorLine>*{
+    color: red !important;
+}
+
+#NumberDisplay >.ErrorLine{
+    background: grey;
+}
+
+#NumberDisplay, #CodeInput, #CodeDisplay, #CodeDisplay *, #ErrorCodeDisplay, #ErrorNumberDisplay{
+    font-size: 1rem;
+    font-family: monospace;
+    line-height: 1.2rem;
+    overflow: visible;
+    tab-size: 4;
+    height: 90%;
+    width: 95%;
+}

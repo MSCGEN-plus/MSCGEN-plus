@@ -1,0 +1,46 @@
+.section{
+    margin-left: 2%;
+}
+
+.keyword{
+    text-align: center;
+}
+
+.nomargins{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.margins{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.imageborder{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+ul{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+p{
+    margin-bottom: 0;
+}
+
+table, th, td {
+    padding: 5px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+body{
+    margin-left:  2%;
+    margin-right: 10%;
+}
+
+html{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

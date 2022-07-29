@@ -1,0 +1,24 @@
+.quote{
+    color: lawngreen;
+}
+
+.comment{
+    color: grey;
+}
+
+.arrow{
+    color: red;
+}
+
+.keyWord{
+    color: yellow;
+}
+
+/*no highlighting of anything that's already highlighted*/
+.highlight > span > span{
+    color: inherit !important;
+}
+/*because multiline quotes with comments in them*/
+.highlight > .quote > .comment{
+    color: grey !important;
+}

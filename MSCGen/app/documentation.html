@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/Documentation.css">
+        <title>MSCGen+ documentation</title>
+    </head>
+    <body>
+        <h1>Documentation MSCGen+</h1>
+        <div>
+            <h2>1. Introduction</h2>
+
+            <section class = "section">
+                <p>An MSCgenerator is a program which is used to parse an input of MSC (Message Sequence Chart) descriptions. This input then gets parsed and generated into an SVG which forms the chart resembling the input. These charts are used for representing entities and their actions between themselves/other entities. The actions are represented by arrows and text notes, the angle of the arrows corresponds to the time it takes for the action to complete. An example would be showing how the messaging works with internet protocols.
+                </p>
+
+                <p>For MSCGen+ there are a couple additions like grouping, the possibility to put certain options in a group or on the respective arc and to let these groups draw parallel to each other. Next the global width option has been removed as there is a pan and zoom which also allows for exporting the part you’ve zoomed into as well as an option to export the whole chart to an SVG or PNG. Finally, there’s also an upgrade to file sharing.
+                </p>
+
+                <p>Mscgen+ works on firefox, chrome and edge. The best tested performance was on firefox for bigger inputs. As for Internet Explorer... it does not work.
+                </p>
+            </section>
+        </div>
+        <br>
+
+        <h2>2. Options on the site</h2>
+        <div class = "section">
+            <h3>2.1 Pan and zoom</h3>
+
+            <section class = "section">
+                <p>The window that shows the chart has a pan and zoom option. Here you can zoom in and out by scrolling and drag around by clicking and holding. If you want to reset your zoom you can click the top right button “Reset Zoom”.</p>
+            </section>
+        </div>
+
+        <div class = "section">
+            <h3>2.2 Export</h3>
+
+            <section class = "section">
+                <img class = "imageborder" src="img/ExportBox.png">
+                <p>When you click on the export button this menu pops up. Here you can choose to export the chart as a svg, png or jpg. By default, it only exports your full chart, but if you tick “only export visible” it will export what you’re currently looking at in the pan and zoom window. “Add a background” adds a background to the export file.</p>
+            </section>
+        </div>
+
+        <div class = "section">
+            <h3>2.3 Share</h3>
+
+            <section class = "section">
+                <img class = "imageborder" src="img/ShareBox.png">
+                <p>When you click on the share button this menu pops up. Here you can choose to either share the whole link (this link is your complete input put into a link). Or a shortened link that can handle more. If the “copy link to clipboard” option is enabled, it will copy the link straight to your clipboard so you can immediately paste it.</p>
+            </section>
+        </div>
+
+        <div class = "section">
+            <h3>2.4 Auto render</h3>
+
+            <section class = "section">
+                <p>Auto render is turned on by default, in this case input will be rendered in real-time. When it is turned off however this will not happen until it is re-enabled.</p>
+            </section>
+        </div>
+
+        <div class = "section">
+            <h3>2.5 Help</h3>
+            <section class = "section">
+                <p>Well the help button brings you here!</p>
+            </section>
+        </div>
+        <br>
+
+        <div>
+            <h2>3. Example</h2>
+
+            <div class = "section">
+                <p>The example below shows a graph which includes all arcs and a lot of the options you can use.
+                </p>
+                <img class = "imageborder" src="img/ArcExample.png">
+                <p>The above example and all other msc inputs follow an outline of:</p>
+
+                <p class="nomargins">Msc{</p>
+                <section class = "section">
+                    <p class="nomargins">Global options (ex: hscale = 2);</p>
+                    <p class="nomargins">Entity list (ex: a,b, “entity name”);</p>
+                    <p class="nomargins">Arc list (ex: a->b, b => “entity name”); (the arc list also contains groups if there are any)</p>
+                </section>
+                <p class="nomargins">}</p>
+            </div>
+        </div>
+        <br>
+
+        <div>
+            <h2>4. Syntax</h2>
+
+            <p>All of the msc input is put between “msc{…}” where the full input is given between the brackets. Comments can be made if a double forward slash (“//”) is put in front of a line or if a full block needs to be commented it can be by putting it between a /**/ (/* “text to comment” */).</p>
+            <p>If you go more specific with an option, then it will override more global options (arc/entity options > group options > global options).</p>
+            <p>For Booleans there are a couple acceptable options for values:</p>
+
+            <ul>
+                <li>True:</li>
+                    <ul>
+                        <li>1</li>
+                        <li>True</li>
+                        <li>On</li>
+                        <li>Yes</li>
+                    </ul>
+                <li>False:</li>
+                    <ul>
+                        <li>0</li>
+                        <li>False</li>
+                        <li>Off</li>
+                        <li>No</li>
+                    </ul>
+            </ul>
+            <br>
+
+            <div class = "section">
+                <h3>4.1 Global Options</h3>
+
+                <p>For the global options the format is “option = value”, the value can be either between quotes (“) or without.</p>
+                <p>There is <strong><u>no width</u></strong> option since there is a pan and zoom implementation in mscgen+, which makes it so that zoom can be used to scale your graph and extract it according to how you zoom it.</p>
+                <p>You separate options by putting a comma between them. At the end of the option list you put a semicolon.</p>
+
+                <p class="margins"><strong>Global options</strong></p>
+
+                <table>
+                    <tr>
+                        <th class="keyword"><strong>Option name</strong></th>
+                        <th class="keyword"><strong>Description</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="keyword">hscale</td>
+                        <td>Scales the graph image by changing the width, this scales the horizontal space between entities/entity-lines according to the given float value while not changing any vertical height/distance. Hence the “h” for horizontal scale.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">arcgradient</td>
+                        <td>Sets the arrow arcs to an angle other than horizontal by giving the amount of pixels for how much further down the end of the arc needs to be compared to the start.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">wordwraparcs</td>
+                        <td>Accepts a boolean value, when true this will make the text on arrow arcs wrap automatically.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">fontsize</td>
+                        <td>Takes a numeric value and changes the size of the font for all the labels to the given size.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">autospacegroup</td>
+                        <td>Accepts a boolean value, if it's true then the group spaces automatically according to the largest group that it runs parallel with. This doesn’t work in nested groups and is turned off by default.</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+
+            <div class = "section">
+                <h3>4.2 Entities</h3>
+
+                <p>The entity format is “entity-name [optional option list]”. The entity-name can be a string between quotes allowing everything but unescaped quotes (“ is not allowed, so write \” to get a quote) and it also allows “\n” to represent a newline. The entity-name can also be one word not surrounded by quotes, where no quotes or “\n” will be acted on. </p>
+                <p>Next there can be an optional option list where if there are options needed the name is followed by a bracket list with the options listed and separated with comma’s if there is more than one option ([option-name = “value”,…]).</p>
+                <p>You separate entities by putting a comma after the option list. At the end of the entities you need to put a semicolon.</p>
+
+                <p class="margins"><strong>Entity options</strong></p>
+
+                <table>
+                    <tr>
+                        <th class="keyword"><strong>Option name</strong></th>
+                        <th class="keyword"><strong>Description</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="keyword">label</td>
+                        <td>Give a string value, that accepts everything except unescaped quotes (\”) and gives a newline on “\n”. If there is no label option, then the entity-name is set as the label.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">fontsize</td>
+                        <td>Takes a numeric value and changes the size of the font for the label to the given size.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">linecolour/linecolor</td>
+                        <td>Sets the colour of the lining of the entity (the square around the text and the entity line under it).</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">textcolour/textcolor</td>
+                        <td>Changes the colour of the text of the label.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">textbgcolour/textbgcolor</td>
+                        <td>Changes the background colour inside the square of the entity.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">arclinecolour/arclinecolor</td>
+                        <td>Sets the default colour for all arc lines(arrows and notes) that start from this entity.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">arctextcolour/arctextcolor</td>
+                        <td>Sets the default colour for all the text on the arcs(arrows and notes) that start from this entity.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">arctextbgcolour/arctextbgcolor</td>
+                        <td>Sets the default background colour for the background of the text on the arcs(arrows and notes) that start from this entity.</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+
+            <div class = "section">
+                <h3>4.3 Arcs</h3>
+
+                <p>The arc format is “entity relation entity [optional option list]”:</p>
+
+                <ul>
+                    <li>Here the first entity is the name of the entity where the arc starts (starting entity).</li>
+                    <li>Relation is the type of arc (arrow or note).</li>
+                    <li>The second entity is the name of the entity where the arc ends (destination entity). </li>
+                    <li>Finally there can be an optional option list if options are necessary. Here the second entity-name is followed by a bracket list with the options listed and separated with comma’s if there is more than one option ([option-name = “value”,…]).</li>
+                </ul>
+
+                <p>If an arc start or goes to a “*”(can be with or without quotes) then the arc will be drawn from the starting or to the destination entity (depending on which one isn’t a “*”) from all entities. For an example, for the arc “a -> *”: starting from 'a' there will be a message arc drawn to all other entities.</p>
+                <p>You separate arcs by putting a comma between them.  Whenever you want to start a new row of arcs you put a semicolon, otherwise it’ll always stay on the same row. You also have to put a semicolon at the end of all your arcs. </p>
+                <p><strong>!Beware though if an entity has been defined then it takes precedence over other things. For example if an entity is named “*”, then the arcs will go to that entity instead of going to all entities!</strong></p>
+
+                <p class="margins"><strong>Arc options</strong></p>
+
+                <table>
+                    <tr>
+                        <th class="keyword"><strong>Option name</strong></th>
+                        <th class="keyword"><strong>Description</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="keyword">label</td>
+                        <td>Give a string value, that accepts everything except unescaped quotes (\”) and gives a newline on “\n”. If there is no label option, you have an empty arrow/note.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">URL</td>
+                        <td>Adds a URL to the label, so when the label is clicked the page redirects to the URL.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">ID</td>
+                        <td>Adds a superscript ID identifier to the label (“label”<sup>(ID)</sup>). Can be a numerical value or a string.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">IDURL</td>
+                        <td>This combines URL and ID by making a super script ID but with the URL as the text, thus making the ID clickable redirecting to the URL. Keep in mind that an ID is needed in order to and a URL to it.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">linecolour/linecolor</td>
+                        <td>Sets the colour of the arc line for this specific arc (the arrow or the box of the note).</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">textcolour/textcolor</td>
+                        <td>Changes the colour of the text of the label.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">textbgcolour/textbgcolor</td>
+                        <td>Changes the background colour of the label. (A box/note can't have a transparent background.)</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">arcskip</td>
+                        <td>Offsets the vertical destination of the arc. Can be a float value and can be negative. If the destination ends up being lower than the lowest arc starting point or higher than the last arc starting point, then the destination defaults to the last arc starting point (the furthest down starting point of an arc).</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">arcgradient</td>
+                        <td>Sets the arrow arcs to an angle other than horizontally by giving the amount of pixels for how much further down the end of the arc needs to be compared to the start. (Here it only affects the specific arrow that it’s added to.)</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">fontsize</td>
+                        <td>Takes a numeric value and changes the size of the font for the label to the given size.</td>
+                    </tr>
+                </table>
+                <br>
+
+                <p class="margins"><strong>Arc types</strong></p>
+
+                <table>
+                    <tr>
+                        <th class="keyword"><strong>Example</strong></th>
+                        <th class="keyword"><strong>Arc syntax</strong></th>
+                        <th class="keyword"><strong>Info</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/MessageArc.png"></td>
+                        <td class="keyword">-> or <-</td>
+                        <td class="keyword">This arrow resembles a message.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/MethodFunctionCall.png"></td>
+                        <td class="keyword">=> or <=</td>
+                        <td class="keyword">This arrow resembles a method or function call.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/MethodFunctionReturn.png"></td>
+                        <td class="keyword">>> or <<</td>
+                        <td class="keyword">This arrow resembles a method or function return value.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/Callback.png"></td>
+                        <td class="keyword">=>> or <<=</td>
+                        <td class="keyword">This arrow resembles a callback.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/EmphasisedMessage.png"></td>
+                        <td class="keyword">:> or &lt;:</td>
+                        <td class="keyword">This arrow resembles an emphasised message.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/LostMessage.png"></td>
+                        <td class="keyword">-x or x-</td>
+                        <td class="keyword">This arrow resembles a lost message.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/TimePassed.png"></td>
+                        <td class="keyword">...</td>
+                        <td class="keyword">Indicates a large time passed or that some signals may be omitted.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/Comment.png"></td>
+                        <td class="keyword">---</td>
+                        <td class="keyword">Used to add comments to a block of signals or to indicate some action or state has occurred.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/ExtraSpace.png"></td>
+                        <td class="keyword">|||</td>
+                        <td class="keyword">This is used to add extra space between rows.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/Box.png"></td>
+                        <td class="keyword">box</td>
+                        <td class="keyword">A box is a box arc which replaces the arrow by a square box. The label is centered in the box and wrapped if necessary.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/Rbox.png"></td>
+                        <td class="keyword">rbox</td>
+                        <td class="keyword">An rbox is a box arc which replaces the arrow by a rounded box. The label is centered in the box and wrapped if necessary.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/Abox.png"></td>
+                        <td class="keyword">abox</td>
+                        <td class="keyword">An abox is a box arc which replaces the arrow by a hexagonal box. The label is centered in the box and wrapped if necessary.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword"><img src="img/Note.png"></td>
+                        <td class="keyword">note</td>
+                        <td class="keyword">A note is a box arc which replaces the arrow by a note form box. The label is centered in the box and wrapped if necessary.</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+
+            <div class = "section">
+                <h3>4.4 Grouping</h3>
+
+                <p>In MSCgen+ there is an option to group arcs together, this allows for multiple groups of arcs to happen at the same time with a different sequence and can be put anywhere in the input.</p>
+                <p>To group arcs together you need to put the arcs that you want to group between brackets({arcs to group}).</p>
+                <p>For each separate group you can add options that go for every arc in that group.</p>
+
+                <p class="margins"><strong>Grouping options</strong></p>
+
+                <table>
+                    <tr>
+                        <th class="keyword"><strong>Option name</strong></th>
+                        <th class="keyword"><strong>Description</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="keyword">linecolour/linecolor</td>
+                        <td>Sets the colour of the arc line for the arcs in the group (the arrow or the box of the note).</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">textcolour/textcolor</td>
+                        <td>Changes the colour of the text of the label of the arcs in the group.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">textbgcolour/textbgcolor</td>
+                        <td>Changes the background colour of the label for the arcs in the group.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">arcgradient</td>
+                        <td>Sets the arrow arcs to an angle other than horizontally by giving the amount of pixels for how much further down the end of the arc needs to be compared to the start. (Here it affects all arrows in the group.)</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">fontsize</td>
+                        <td>Takes a numeric value and changes the size of the font for the labels in the group to the given size.</td>
+                    </tr>
+                    <tr>
+                        <td class="keyword">autospacegroup</td>
+                        <td>Accepts a boolean value, if it's true then the group spaces automatically according to the largest group that it runs parallel with. This doesn’t work in nested groups and is turned off by default</td>
+                    </tr>
+                </table>
+                <br>
+
+                <p class="margins"><strong>Group example</strong></p>
+                <p>In example one you see a group with autospacegroup = false (false is the default value, so it's not explicitly declared), here you can see the group doesn’t finish at the end of the group it runs parallel with. In example two you see that the group has autospacegroup = true, here you see that it does end at the end of the group that it runs parallel with. You can see that the two groups are separated by brackets, group 1 follows the global arcgradient 10, group 2 follows the overridden group arcgradient of 30.
+                <br>
+
+                <p class="margins"><strong>Example 1</strong></p>
+                <img class = "imageborder" src="img/GroupEx1.png">
+                <br>
+
+                <p class="margins"><strong>Example 2</strong></p>
+                <img class = "imageborder" src="img/GroupEx2.png">
+                <br>
+            </div>
+        </div>
+        <br>
+
+        <div>
+            <h2>5. Colours</h2>
+
+            <p>For the different colour options there is standard rgb support where you just need to give the RGB colour code (format: “#rgb”) but there are also a couple supported colour names, these are listed here;
+            </p>
+
+            <p class="margins"><strong>Supported colours</strong></p>
+
+            <table>
+                <tr>
+                    <th class="keyword"><strong>Colour strings</strong></th>
+                    <th class="keyword"><strong>RGB Codes</strong></th>
+                    <th class="keyword"><strong>Colour example</strong></th>
+                </tr>
+                <tr>
+                    <td class="keyword">white</td>
+                    <td class="keyword">#ffffffff</td>
+                    <td class="keyword" style="background-color:#ffffffff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">silver</td>
+                    <td class="keyword">#c0c0c0ff</td>
+                    <td class="keyword" style="background-color:#c0c0c0ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">gray/grey</td>
+                    <td class="keyword">#808080ff</td>
+                    <td class="keyword" style="background-color:#808080ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">black</td>
+                    <td class="keyword">#000000ff</td>
+                    <td class="keyword" style="background-color:#000000ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">maroon</td>
+                    <td class="keyword">#800000ff</td>
+                    <td class="keyword" style="background-color:#800000ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">red</td>
+                    <td class="keyword">#ff0000ff</td>
+                    <td class="keyword" style="background-color:#ff0000ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">orange</td>
+                    <td class="keyword">#ffb000ff</td>
+                    <td class="keyword" style="background-color:#ffb000ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">yellow</td>
+                    <td class="keyword">#ffff00ff</td>
+                    <td class="keyword" style="background-color:#ffff00ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">olive</td>
+                    <td class="keyword">#808000ff</td>
+                    <td class="keyword" style="background-color:#808000ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">green/lime</td>
+                    <td class="keyword">#00ff00ff</td>
+                    <td class="keyword" style="background-color:#00ff00ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">aqua</td>
+                    <td class="keyword">#00ffffff</td>
+                    <td class="keyword" style="background-color:#00ffffff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">teal</td>
+                    <td class="keyword">#008080ff</td>
+                    <td class="keyword" style="background-color:#008080ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">blue</td>
+                    <td class="keyword">#0000ffff</td>
+                    <td class="keyword" style="background-color:#0000ffff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">navy</td>
+                    <td class="keyword">#000080ff</td>
+                    <td class="keyword" style="background-color:#000080ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">indigo</td>
+                    <td class="keyword">#440088ff</td>
+                    <td class="keyword" style="background-color:#440088ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">purple</td>
+                    <td class="keyword">#800080ff</td>
+                    <td class="keyword" style="background-color:#800080ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">violet</td>
+                    <td class="keyword">#d02090ff</td>
+                    <td class="keyword" style="background-color:#d02090ff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">fuchsia</td>
+                    <td class="keyword">#ff00ffff</td>
+                    <td class="keyword" style="background-color:#ff00ffff;"></td>
+                </tr>
+                <tr>
+                    <td class="keyword">transparent</td>
+                    <td class="keyword">#00000000</td>
+                    <td class="keyword" style="background-color:#00000000;">Different from white as it just makes the background/text completely transparent</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
